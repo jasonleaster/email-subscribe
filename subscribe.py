@@ -1,9 +1,9 @@
 import os
 
-# import smtplib
+import smtplib
 import datetime
-# from email.mime.text import MIMEText
-# from email.header import Header
+from email.mime.text import MIMEText
+from email.header import Header
 
 import requests
 
@@ -51,26 +51,25 @@ def get_loving_days():
     return (today - anniversary).days
 
 
-# def send_email():
-#     """
-#
-#     :return:
-#     """
-#     content = get_weather_info()
-#
-#     message = MIMEText(content, 'plain', 'utf-8')
-#     message['From'] = Header('A handsome boy', 'utf-8')
-#     message['To'] = Header('A beautiful girl')
-#     message['Subject'] = Header('日常关心', 'utf-8')
-#
-#     try:
-#         smtpObj = smtplib.SMTP_SSL(MAIL_HOST)
-#         smtpObj.login(MAIL_USER, MAIL_PASS)
-#         smtpObj.sendmail(SENDER, RECEIVERS, message.as_string())
-#         smtpObj.quit()
-#     except Exception as e:
-#         print(e)
+def send_email(content):
+    """
+
+    :return:
+    """
+    message = MIMEText(content, 'plain', 'utf-8')
+    message['From'] = Header('A handsome boy', 'utf-8')
+    message['To'] = Header('A beautiful girl')
+    message['Subject'] = Header('日常关心', 'utf-8')
+
+    try:
+        smtpObj = smtplib.SMTP_SSL(MAIL_HOST)
+        smtpObj.login(MAIL_USER, MAIL_PASS)
+        smtpObj.sendmail(SENDER, RECEIVERS, message.as_string())
+        smtpObj.quit()
+    except Exception as e:
+        print(e)
 
 
 if __name__ == "__main__":
-    get_weather_info()
+    content = get_weather_info()
+    send_email(content)
