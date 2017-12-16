@@ -73,7 +73,7 @@ def send_email():
     try:
         smtpObj = smtplib.SMTP_SSL(MAIL_HOST)
         smtpObj.login(MAIL_USER, MAIL_PASS)
-        smtpObj.sendmail(SENDER, RECEIVER, message.as_string())
+        smtpObj.sendmail(SENDER, ['13025332131@163.com'], message.as_string())
         smtpObj.quit()
     except Exception as e:
         print(e)
