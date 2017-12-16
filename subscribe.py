@@ -15,7 +15,9 @@ MAIL_USER = os.environ.get('MAIL_USER')
 MAIL_PASS = os.environ.get('MAIL_PASS')
 WEATHER_KEY = os.environ.get('WEATHER_KEY')
 
-RECEIVERS = [].append(os.environ.get('RECEIVER'))
+RECEIVERS = []
+RECEIVERS.append(os.environ.get('RECEIVER'))
+
 SENDER = 'chenjiandongx@qq.com'
 
 
