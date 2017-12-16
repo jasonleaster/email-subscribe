@@ -15,7 +15,7 @@ MAIL_USER = os.environ.get('MAIL_USER')
 MAIL_PASS = os.environ.get('MAIL_PASS')
 WEATHER_KEY = os.environ.get('WEATHER_KEY')
 
-RECEIVER = ['13025332131@163.com']
+RECEIVER = ['1259462438@qq.com']
 SENDER = 'chenjiandongx@qq.com'
 
 # 聚合数据天气预报 api
