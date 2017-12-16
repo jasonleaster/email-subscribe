@@ -18,15 +18,13 @@ WEATHER_KEY = os.environ.get('WEATHER_KEY')
 RECEIVER = ['13025332131@163.com']
 SENDER = 'chenjiandongx@qq.com'
 
-
+# 聚合数据天气预报 api
 weather_api = "http://v.juhe.cn/weather/index?format=2&" \
               "cityname={cityname}&key={key}"
 
 
 def get_weather_info():
-    """
-
-    :return:
+    """ 获取天气信息
     """
     guangzhou = requests.get(
         weather_api.format(cityname=GUANGZHOU, key=WEATHER_KEY)).json()
@@ -62,9 +60,7 @@ def get_weather_info():
 
 
 def get_loving_days():
-    """
-
-    :return:
+    """ 获取恋爱天数
     """
     today = datetime.datetime.today()
     anniversary = datetime.datetime(2015, 7, 2)
@@ -72,14 +68,12 @@ def get_loving_days():
 
 
 def send_email():
-    """
-
-    :return:
+    """ 发送邮件
     """
     content = get_weather_info()
     message = MIMEText(content, 'plain', 'utf-8')
     message['From'] = Header('暖宝宝', 'utf-8')
-    # message['To'] = Header('a handsome soul', 'utf-8')
+    message['To'] = Header('a handsome soul')
     message['Subject'] = Header('男朋友的日常问候', 'utf-8')
     try:
         smtpObj = smtplib.SMTP_SSL(MAIL_HOST)
