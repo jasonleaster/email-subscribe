@@ -15,9 +15,7 @@ MAIL_USER = os.environ.get('MAIL_USER')
 MAIL_PASS = os.environ.get('MAIL_PASS')
 WEATHER_KEY = os.environ.get('WEATHER_KEY')
 
-RECEIVERS = []
-RECEIVERS.append(os.environ.get('RECEIVER'))
-
+RECEIVER = os.environ.get('RECEIVER')
 SENDER = 'chenjiandongx@qq.com'
 
 
@@ -75,7 +73,7 @@ def send_email():
     try:
         smtpObj = smtplib.SMTP_SSL(MAIL_HOST)
         smtpObj.login(MAIL_USER, MAIL_PASS)
-        smtpObj.sendmail(SENDER, RECEIVERS, message.as_string())
+        smtpObj.sendmail(SENDER, RECEIVER, message.as_string())
         smtpObj.quit()
     except Exception as e:
         print(e)
