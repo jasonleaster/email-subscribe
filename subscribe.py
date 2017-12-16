@@ -41,7 +41,7 @@ def get_weather_info():
         return content.format(
             date_y=today['date_y'],
             week=today['week'],
-            loving_day=get_loving_days(),
+            loving_days=get_loving_days(),
             weather=today['weather'],
             wind=today['wind'],
             temperature=today['temperature'],
