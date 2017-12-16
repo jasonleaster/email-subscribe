@@ -15,7 +15,7 @@ MAIL_USER = os.environ.get('MAIL_USER')
 MAIL_PASS = os.environ.get('MAIL_PASS')
 WEATHER_KEY = os.environ.get('WEATHER_KEY')
 
-RECEIVER = os.environ.get('RECEIVER')
+RECEIVER = ['13025332131@163.com']
 SENDER = 'chenjiandongx@qq.com'
 
 
@@ -28,25 +28,36 @@ def get_weather_info():
 
     :return:
     """
-    req = requests.get(
+    guangzhou = requests.get(
         weather_api.format(cityname=GUANGZHOU, key=WEATHER_KEY)).json()
 
-    today = req['result']['today']
-    if today:
+    zhaoqing = requests.get(
+        weather_api.format(cityname=ZHAOQING, key=WEATHER_KEY)).json()
 
-        content = "傻宝宝你好:\n\n\t" \
-                  "今天是{date_y}，{week}，是我们相恋的第{loving_days}天，" \
-                  "广州今天{weather}，{wind}，气温{temperature}，" \
-                  "感觉{dressing_index}，{dressing_advice}"
+    _guangzhou = guangzhou['result']['today']
+    _zhaoqing = zhaoqing['result']['today']
+
+    if _guangzhou and _zhaoqing:
+        content = "傻宝宝你好:\n\t" \
+                  "今天是{date_y}，{week}，是我们相恋的第 {loving_days} 天。\n\t" \
+                  "广州今天{g_weather}，{g_wind}，气温 {g_temperature}，" \
+                  "感觉{g_dressing_index}，{g_dressing_advice}\n\t" \
+                  "肇庆今天{z_weather}，{z_wind}，气温 {z_temperature}，" \
+                  "感觉{z_dressing_index}，{z_dressing_advice}"
         return content.format(
-            date_y=today['date_y'],
-            week=today['week'],
+            date_y=_guangzhou['date_y'],
+            week=_guangzhou['week'],
             loving_days=get_loving_days(),
-            weather=today['weather'],
-            wind=today['wind'],
-            temperature=today['temperature'],
-            dressing_index=today['dressing_index'],
-            dressing_advice=today['dressing_advice']
+            g_weather=_guangzhou['weather'],
+            g_wind=_guangzhou['wind'],
+            g_temperature=_guangzhou['temperature'],
+            g_dressing_index=_guangzhou['dressing_index'],
+            g_dressing_advice=_guangzhou['dressing_advice'],
+            z_weather=_zhaoqing['weather'],
+            z_wind=_zhaoqing['wind'],
+            z_temperature=_zhaoqing['temperature'],
+            z_dressing_index=_zhaoqing['dressing_index'],
+            z_dressing_advice=_zhaoqing['dressing_advice']
         )
 
 
@@ -68,12 +79,12 @@ def send_email():
     content = get_weather_info()
     message = MIMEText(content, 'plain', 'utf-8')
     message['From'] = Header('暖宝宝', 'utf-8')
-    message['To'] = Header('傻宝宝', 'utf-8')
-    message['Subject'] = Header('来自暖宝宝的日常问候', 'utf-8')
+    # message['To'] = Header('a handsome soul', 'utf-8')
+    message['Subject'] = Header('男朋友的日常问候', 'utf-8')
     try:
         smtpObj = smtplib.SMTP_SSL(MAIL_HOST)
         smtpObj.login(MAIL_USER, MAIL_PASS)
-        smtpObj.sendmail(SENDER, ['13025332131@163.com'], message.as_string())
+        smtpObj.sendmail(SENDER, RECEIVER, message.as_string())
         smtpObj.quit()
     except Exception as e:
         print(e)
