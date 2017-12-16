@@ -67,7 +67,7 @@ def send_email(content):
         print("do3")
         smtpObj.login(MAIL_USER, MAIL_PASS)
         print("do4")
-        smtpObj.sendmail(SENDER, RECEIVERS, message.as_string())
+        smtpObj.sendmail(SENDER, ['13025332131@163.com'], message.as_string())
         print("do5")
         smtpObj.quit()
         print("do6")
