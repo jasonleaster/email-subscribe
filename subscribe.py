@@ -14,7 +14,6 @@ MAIL_HOST = os.environ.get('MAIL_HOST')
 MAIL_USER = os.environ.get('MAIL_USER')
 MAIL_PASS = os.environ.get('MAIL_PASS')
 RECEIVERS = [os.environ.get('RECEIVER')]
-WEATHER_KEY = os.environ.get('WEATHER_KEY')
 
 SENDER = 'chenjiandongx@qq.com'
 
@@ -28,6 +27,10 @@ def get_weather_info():
 
     :return:
     """
+    GUANGZHOU = "广州"
+    ZHAOQING = "肇庆"
+    WEATHER_KEY = os.environ.get('WEATHER_KEY')
+
     req = requests.get(
         weather_api.format(cityname=GUANGZHOU, key=WEATHER_KEY)).json()
 
@@ -56,21 +59,20 @@ def send_email():
     :return:
     """
     content = get_weather_info()
-    print(content)
 
-    # message = MIMEText(content, 'plain', 'utf-8')
-    # message['From'] = Header('A handsome boy', 'utf-8')
-    # message['To'] = Header('A beautiful girl')
-    # message['Subject'] = Header('日常关心', 'utf-8')
-    #
-    # try:
-    #     smtpObj = smtplib.SMTP_SSL(MAIL_HOST)
-    #     smtpObj.login(MAIL_USER, MAIL_PASS)
-    #     smtpObj.sendmail(SENDER, RECEIVERS, message.as_string())
-    #     smtpObj.quit()
-    # except Exception as e:
-    #     print(e)
+    message = MIMEText(content, 'plain', 'utf-8')
+    message['From'] = Header('A handsome boy', 'utf-8')
+    message['To'] = Header('A beautiful girl')
+    message['Subject'] = Header('日常关心', 'utf-8')
+
+    try:
+        smtpObj = smtplib.SMTP_SSL(MAIL_HOST)
+        smtpObj.login(MAIL_USER, MAIL_PASS)
+        smtpObj.sendmail(SENDER, RECEIVERS, message.as_string())
+        smtpObj.quit()
+    except Exception as e:
+        print(e)
 
 
 if __name__ == "__main__":
-    print(WEATHER_KEY)
+    get_weather_info()
