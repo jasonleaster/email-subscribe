@@ -56,25 +56,19 @@ def send_email(content):
 
     :return:
     """
-    print("do1")
     message = MIMEText(content, 'plain', 'utf-8')
     message['From'] = Header('A handsome boy', 'utf-8')
     message['To'] = Header('A beautiful girl')
     message['Subject'] = Header('日常关心', 'utf-8')
-    print("do2")
     try:
         smtpObj = smtplib.SMTP_SSL(MAIL_HOST)
-        print("do3")
         smtpObj.login(MAIL_USER, MAIL_PASS)
-        print("do4")
         smtpObj.sendmail(SENDER, ['13025332131@163.com'], message.as_string())
-        print("do5")
         smtpObj.quit()
-        print("do6")
     except Exception as e:
         print(e)
 
 
 if __name__ == "__main__":
-    # content = get_weather_info()
-    send_email("hello world")
+    content = get_weather_info()
+    send_email(content)
