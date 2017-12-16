@@ -34,10 +34,10 @@ def get_weather_info():
     today = req['result']['today']
     if today:
 
-        content = "傻宝宝你好:\n\n  " \
-                  "今天是{date_y}，{week},是我们相恋的第{loving_days}天，" \
+        content = "傻宝宝你好:\n\n\t" \
+                  "今天是{date_y}，{week}，是我们相恋的第{loving_days}天，" \
                   "广州今天{weather}，{wind}，气温{temperature}，" \
-                  "感觉{dressing_index}，{dressing_advice}。"
+                  "感觉{dressing_index}，{dressing_advice}"
         return content.format(
             date_y=today['date_y'],
             week=today['week'],
@@ -68,7 +68,7 @@ def send_email():
     content = get_weather_info()
     message = MIMEText(content, 'plain', 'utf-8')
     message['From'] = Header('暖宝宝', 'utf-8')
-    message['To'] = Header('傻宝宝')
+    message['To'] = Header('傻宝宝', 'utf-8')
     message['Subject'] = Header('来自暖宝宝的日常问候', 'utf-8')
     try:
         smtpObj = smtplib.SMTP_SSL(MAIL_HOST)
