@@ -37,7 +37,7 @@ def get_weather_info():
         temperature=today['temperature'],
         weather=today['weather']
     )
-    print(content)
+    print("do0")
     return content
 
 
