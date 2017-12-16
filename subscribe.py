@@ -76,5 +76,5 @@ def send_email(content):
 
 
 if __name__ == "__main__":
-    content = get_weather_info()
-    send_email(content)
+    # content = get_weather_info()
+    send_email("hello world")
