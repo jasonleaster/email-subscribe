@@ -1,5 +1,6 @@
 import os
 import smtplib
+import datetime
 from email.mime.text import MIMEText
 from email.header import Header
 
@@ -39,7 +40,13 @@ def get_weather_info():
 
 
 def get_loving_days():
-    pass
+    """
+
+    :return:
+    """
+    today = datetime.datetime.today()
+    anniversary = datetime.datetime(2015, 7, 2)
+    return (today - anniversary).days
 
 
 def send_email():
@@ -64,4 +71,4 @@ def send_email():
 
 
 if __name__ == "__main__":
-    send_email()
+    print(get_loving_days())
