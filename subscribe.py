@@ -36,7 +36,7 @@ def get_weather_info():
     _zhaoqing = zhaoqing['result']['today']
 
     if _guangzhou and _zhaoqing:
-        content = "傻宝宝你好:\n\t" \
+        content = "早安，傻宝宝:\n\t" \
                   "今天是{date_y}，{week}，是我们相恋的第 {loving_days} 天。\n\t" \
                   "广州今天{g_weather}，{g_wind}，气温 {g_temperature}，" \
                   "感觉{g_dressing_index}，{g_dressing_advice}\n\t" \
