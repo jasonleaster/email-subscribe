@@ -74,7 +74,8 @@ def get_weather_info():
                 _z_tomorrow_type=zhaoqing_tomorrow['type'],
                 _z_tomorrow_notice=zhaoqing_tomorrow['notice'],
             )
-
+    else:
+        return "傻宝宝，这破接口好像又不行了哈！！！"
 
 def get_loving_days():
     """ 获取恋爱天数
@@ -106,5 +107,4 @@ def send_email():
 
 
 if __name__ == "__main__":
-    print(get_weather_info())
-    # send_email()
+    send_email()
