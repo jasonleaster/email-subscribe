@@ -9,6 +9,11 @@ import requests
 
 GUANGZHOU = "广州"
 ZHAOQING = "肇庆"
+headers = {
+    'X-Requested-With': 'XMLHttpRequest',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36'
+                  '(KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'
+}
 
 MAIL_HOST = os.environ.get('MAIL_HOST')
 MAIL_USER = os.environ.get('MAIL_USER')
@@ -25,11 +30,11 @@ weather_api = "https://www.sojson.com/open/api/weather/json.shtml?city={}"
 def get_weather_info():
     """ 获取天气信息
     """
-    guangzhou = requests.get(weather_api.format(GUANGZHOU)).json()
+    guangzhou = requests.get(weather_api.format(GUANGZHOU, headers=headers)).json()
     guangzhou_today = guangzhou['data']['forecast'][0]
     guangzhou_tomorrow=guangzhou['data']['forecast'][1]
 
-    zhaoqing = requests.get(weather_api.format(ZHAOQING)).json()
+    zhaoqing = requests.get(weather_api.format(ZHAOQING, headers=headers)).json()
     zhaoqing_today = zhaoqing['data']['forecast'][0]
     zhaoqing_tomorrow = zhaoqing['data']['forecast'][1]
 
