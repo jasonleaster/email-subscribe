@@ -2,7 +2,7 @@ language: python
 notifications:
   email:
     recipients:
-      - chenjiandongx@qq.com
+      - jasonleaster@163.com
     on_success: change # default: change
     on_failure: always # default: always
 python:
